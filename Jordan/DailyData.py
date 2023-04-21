@@ -22,9 +22,7 @@ class DailyData:
             else:
                 rate = 0.6
             save_row = pd.Series({'StartTime': start_time, 'EndTime': end_time, 'Rate': rate})
-            self.save_time_df = self.save_time_df.append(save_row, ignore_index=True)
+            save_rows = save_row.to_frame().T
+            self.save_time_df = pd.concat([self.save_time_df, save_rows], ignore_index=True)
         self.save_time_df = self.save_time_df.drop(self.save_time_df.index[-1])
         return self.save_time_df
-
-
-
