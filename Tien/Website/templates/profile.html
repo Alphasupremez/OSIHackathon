@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block title %}Profile{% endblock %} {% block content %}
+<form method="POST">
+  <h3 align="center">Profile</h3>
+  <div class="form-gorup">
+    <label for="email">Email Address: </label>
+    <label for="email">{{email}}</label>
+  </div>
+
+  <div class="form-gorup">
+    <label for="firstName">First Name: </label>
+    <label for="firstname">{{name}}</label>
+  </div>
+  
+  <div class="form-gorup">
+    <label for="firstName">Total savings: $</label>
+    <label for="firstname">{{total_savings}}</label>
+  </div>
+
+  <a class="nav-item nav-link" id="home" href="/rewards">Rewards Page</a>
+
+
+{% endblock %}
+
