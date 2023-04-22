@@ -4,7 +4,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 
 from .Saving import Saving
-# from .DailyData import 
+from .save_calc import DisplaySavings
+import pandas as pd
 
 auth = Blueprint('auth', __name__)
 
@@ -86,11 +87,11 @@ def savings():
         rate = request.form.get('rate')
         
         # startTime needs to be 0-22
-        if int(startTime) < 0 or int(startTime) > 22:
+        if int(startTime) < 0 or int(startTime) > 2200:
             flash("Start time must be greater than 0.", category='error')
         
         # endTime needs to be 1-23
-        elif int(endTime) > 23 or int(endTime) < 1:
+        elif int(endTime) > 2300 or int(endTime) < 100:
             flash("End time must be less than 23.", category='error')
         
         # startTime and endTime can't be equal to each other
@@ -105,6 +106,16 @@ def savings():
         # save = 0.00
     Savings = Saving(startTime, endTime, rate)
     save_amount = Savings.compute_saving()
+    filename = "Tien/Website/savings.csv"
+    ds = DisplaySavings(filename, save_amount)
+    ts = ds.total_savings()
+    
+    cps = ds.calculate_past_savings()
+    saving = pd.read_csv(filename)
+    
+    ps = saving['Savings'].iloc[-1]
+    
+    
         
     # formated way to pass the total_savings value from the function and immediatly display it
-    return render_template("savings.html", total_savings = f"{save_amount :0.2f}", boolean=True)
+    return render_template("savings.html", total_savings = f"{ts :0.2f}", past_savings = f"{ps :0.2f}", boolean=True)
