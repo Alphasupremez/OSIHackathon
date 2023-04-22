@@ -6,11 +6,11 @@
 
 from flask import Blueprint, render_template
 
-my_views = Blueprint('my_view', __name__)
+views = Blueprint('views', __name__)
 
 
 # Define route
-@my_views.route('/')  
+@views.route('/')  
 def home_page():
     name = 'our Website'
     return render_template("home.html", name=name)

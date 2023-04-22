@@ -18,10 +18,10 @@ def create_app():
     # Initialize database
     db.init_app(app)
 
-    from .views import my_views
+    from .views import views
     from .auth import auth
 
-    app.register_blueprint(my_views, url_prefix='/')
+    app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
     from .models import User, Note
