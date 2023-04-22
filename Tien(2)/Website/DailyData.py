@@ -6,7 +6,7 @@ class DailyData:
         self.save_time_df = pd.DataFrame(columns=['StartTime', 'EndTime', 'Rate'])
         
     def calculate_rates(self):
-        self.energy_df = pd.read_csv('Lor\\Energy.csv')
+        self.energy_df = pd.read_csv('Website/Energy.csv')
         for index, row in self.energy_df.iterrows():
             start_time = row['StartTime']
             end_time = row['EndTime']
