@@ -3,6 +3,8 @@ from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 
+from .Saving import Saving
+# from .DailyData import 
 
 auth = Blueprint('auth', __name__)
 
@@ -73,9 +75,9 @@ def saveFunction(start, end, rate):
 @auth.route('/savings', methods=['GET', 'POST'])
 def savings():
     # Default values
-    startTime = 0
-    endTime = 0
-    rate = 0
+    startTime = 1
+    endTime = 2
+    rate = 1
     
     # After pressing the submit button or enter this takes effect
     if request.method == 'POST':
@@ -99,5 +101,10 @@ def savings():
         elif float(rate) <= 0:
             flash("Rate needs to be greater than 0.", category='error')
             
+        
+        # save = 0.00
+    Savings = Saving(startTime, endTime, rate)
+    save_amount = Savings.compute_saving()
+        
     # formated way to pass the total_savings value from the function and immediatly display it
-    return render_template("savings.html", total_savings = f"{saveFunction(int(startTime), int(endTime), float(rate)) :0.2f}", boolean=True)
+    return render_template("savings.html", total_savings = f"{save_amount :0.2f}", boolean=True)
