@@ -1,6 +1,17 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}
-
 {% block content %}
-<h1>This is homepage of {{name}}</h1>
-<h2>This is your map</h2>
+<br />
+<div id="content">
+    <i align="left">Welcome! {{user.first_name}} <br>
+    Top nearby charging offers</i>
+    <br />
+    <br />
+    <style>
+        iframe {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+    <iframe {{map_html|safe}} ></iframe>
+</div>
 {% endblock %}
