@@ -12,6 +12,7 @@ class DailyData:
             end_time = row['EndTime']
             genlvl = row['GenLvl']
             genload = row['Generation'] - row['Load']
+            index1 = row['Index']
             if genload > 0:
                 if genlvl == 'low':
                     rate = 0.5
@@ -21,7 +22,7 @@ class DailyData:
                     rate = 0.3
             else:
                 rate = 0.6
-            save_row = pd.Series({'StartTime': start_time, 'EndTime': end_time, 'Rate': rate})
+            save_row = pd.Series({'Index': index1, 'StartTime': start_time, 'EndTime': end_time, 'Rate': rate})
             save_rows = save_row.to_frame().T
             self.save_time_df = pd.concat([self.save_time_df, save_rows], ignore_index=True)
         self.save_time_df = self.save_time_df.drop(self.save_time_df.index[-1])
