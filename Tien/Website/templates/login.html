@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %}
+
+{% block content %}
+
+<form method="POST">
+  <br />
+  <h3 align="center"><img
+          src="{{ url_for('static', filename='husky.png') }}"
+          alt="Logo"
+          height="60" />Login
+  </h3>
+  <div class="form-gorup">
+    <label for="email">Enter Email</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="Enter email"
+    />
+  </div>
+  
+  <div class="form-gorup">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      name="password"
+      placeholder="Enter Password"
+    />
+  </div>
+  <br />
+  <button type="submit" class="btn btn-primary">Login</button>
+  <br />
+  <br />
+  <style> 
+    .center-image { 
+      display:block;
+      margin: auto;
+    }
+  </style>
+  <img align="center" src="{{ url_for('static', filename='electric_car.png') }}" alt="Image Description" width="500" height="400" class="center-image">
+</form>
+
+{% endblock %}
